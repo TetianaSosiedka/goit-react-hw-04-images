@@ -1,1 +1,3 @@
-An image search application by keyword.
+An images search application by keyword.
+
+Used the React library. Creat by using hooks
