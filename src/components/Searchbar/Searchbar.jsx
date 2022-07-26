@@ -1,26 +1,20 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 
 import { HeaderSearchbar, SearchForm } from './Searchbar.styled';
 
-class Searchbar extends Component {
-  state = {
-    name: '',
-    disabled: true,
+const Searchbar = ({ onSubmit }) => {
+  const [name, setName] = useState('');
+  const [disabled, setDisabled] = useState(true);
+
+  const handleInputName = ({ target }) => {
+    setName(target.value);
+    setDisabled(false);
   };
 
-  handleInputName = ({ target }) => {
-    this.setState({
-      name: target.value,
-      disabled: false,
-    });
-  };
-
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
-
-    const name = this.state.name;
 
     if (name.trim() === '') {
       toast.error('Fill in the search term!', {
@@ -35,36 +29,33 @@ class Searchbar extends Component {
       return;
     }
 
-    this.props.onSubmit(this.state);
+    onSubmit(name);
 
-    this.setState({
-      name: '',
-      disabled: true,
-    });
+    setName('');
+    setDisabled(true);
   };
 
-  render() {
-    return (
-      <HeaderSearchbar>
-        <SearchForm onSubmit={this.handleSubmit}>
-          <button type="submit" disabled={this.state.disabled}>
-            <span>
-              <BsSearch />
-            </span>
-          </button>
+  return (
+    <HeaderSearchbar>
+      {console.log('HeaderSearchbar')}
+      <SearchForm onSubmit={handleSubmit}>
+        <button type="submit" disabled={disabled}>
+          <span>
+            <BsSearch />
+          </span>
+        </button>
 
-          <input
-            onChange={this.handleInputName}
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-            value={this.state.name}
-          />
-        </SearchForm>
-      </HeaderSearchbar>
-    );
-  }
-}
+        <input
+          onChange={handleInputName}
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+          value={name}
+        />
+      </SearchForm>
+    </HeaderSearchbar>
+  );
+};
 
 export default Searchbar;
