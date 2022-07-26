@@ -8,8 +8,6 @@ const Searchbar = ({ onSubmit }) => {
   const [name, setName] = useState('');
   const [disabled, setDisabled] = useState(true);
 
-  useEffect(() => console.log('header', new Date()));
-
   const handleInputName = ({ target }) => {
     setName(target.value);
     setDisabled(false);
