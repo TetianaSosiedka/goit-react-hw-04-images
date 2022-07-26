@@ -1,6 +1,6 @@
 import Container from './App.styled';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -26,7 +26,7 @@ export const App = () => {
     setPege(1);
   }, [name]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!name) {
       return;
     }
