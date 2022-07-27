@@ -12,6 +12,11 @@ const Modal = ({ onClouse, children }) => {
 
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('click', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('click', handleKeyDown);
+    };
   }, [onClouse]);
 
   return (
